@@ -1,26 +1,17 @@
-from sqlalchemy import create_engine
-import os
-import yaml
-import psycopg2
 import pandas as pd
 import numpy as np
 
-def load_credentials(data):
-    """Function loads credentials from yaml file."""
-    with open (data, "r") as x: return yaml.safe_load(x)
-    
-def load_data(data): return pd.read_csv(data)
-
-
 class DataFrameTransform:
     def __init__(self, dataframe):
+        """Initiates class meant to aid in filling the missing values in the """
         self.dataframe = dataframe;
 
     def impute_zeros(self, column):
-        for i in column:
-            self.dataframe[i] = self.dataframe[i].fillna(0)
+        self.dataframe[column] = self.dataframe[column].fillna(0)
 
     def impute_median(self, column):
+        self.dataframe[column] = self.dataframe[column].fillna(self.dataframe[column].median(), inplace=True)
+    def drop(self, column):
+        """Method removes specific columns."""
         for i in column:
-            self.dataframe[i] = self.dataframe[i].fillna(self.dataframe[i].median())
-
+            self.dataframe.drop(i, axis=1, inplace=True)

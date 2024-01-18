@@ -87,7 +87,7 @@ class DataFrameInfo:
 
 class DataFrameTransform:
     def __init__(self, dataframe):
-        """Initiates class meant to aid in filling the missing values in the """
+        """Initiates class meant to aid in filling the missing values."""
         self.dataframe = dataframe;
 
     def impute_zeros(self, column):
@@ -114,26 +114,7 @@ if __name__ == "__main__":
     print(Stats.shape())
     print(Stats.null_values())
 
-#transforming the data
-    modified_dataframe = dataframe
-    categorical_columns = ['grade', 'sub_grade', 'home_ownership', 'verification_status',
-                           'loan_status', 'payment_plan', 'purpose','earliest_credit_line', 'application_type']
-    datetime_columns = ['issue_date', 'last_payment_date', 'next_payment_date', 'last_credit_pull_date']
-    
-    float_columns = ['term', 'employment_length']
-    TransformedData = DataTransform(modified_dataframe)
-    TransformedData.to_categorical(categorical_columns)
-    TransformedData.to_date_time(datetime_columns)
-    TransformedData.to_float(float_columns)
-    modified_dataframe = TransformedData.dataframe
-    modified_dataframe.to_csv(file2)
 
-    Stats = DataFrameInfo(modified_dataframe)
-    print(Stats.data_type())
-# funded_amount, term, int_rate, employment_length,last_payment_date and last_credit_pull_date columns 
-# have less than 10% of null data therefore values will be imputed; 
-# mths_since_last_delinq, mths_since_last_record, mths_since_last_major_derog, next_payment_date  and
-# all have a very high percentage of null values and would be safer to drop entirely.
 
     dropped_columns=['mths_since_last_delinq', 'mths_since_last_record', 'mths_since_last_major_derog', 
                      'next_payment_date']
