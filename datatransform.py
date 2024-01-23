@@ -8,7 +8,8 @@ class DataTransform:
         
     def to_float (self, column):
         """Method turns vales of a specified column from string to float data."""
-        self.dataframe[column] = self.dataframe[column].to_string().str.extract('(\d+)').astype(float)
+        for i in column:
+            self.dataframe[i] = self.dataframe[i].to_string().str.extract('(\d+)').astype(float)
                 
     def to_date_time(self, column):
         """Method turns values of a specified column to datetime format."""
