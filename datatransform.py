@@ -7,13 +7,13 @@ class DataTransform:
         """Initialises the DataTransform in order to convert all tabular values to specific types of data."""
         
     def to_float (self, column):
-        """Method turns vales of a specified column from string to float data."""
+        """Method turns values of a specified column from string to float data."""
         for i in column:
-            self.dataframe[i] = self.dataframe[i].to_string().str.extract('(\d+)').astype(float)
+            self.dataframe[i] = self.dataframe[i].str.extract('(\d+)').astype(float)
                 
     def to_date_time(self, column):
         """Method turns values of a specified column to datetime format."""
-        self.dataframe[column] = pd.to_datetime(self.dataframe[column]) 
+        self.dataframe[column] = pd.to_datetime(self.dataframe[column], format="%b-%Y")
         
     def to_categorical(self, column):
         """Method assigns the values of a specified column to categorical data."""

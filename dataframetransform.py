@@ -3,13 +3,15 @@ import numpy as np
 
 class DataFrameTransform:
     def __init__(self, dataframe):
-        """Initiates class meant to aid in filling the missing values in the """
+        """Initiates class meant to aid in filling the missing values in the dataframe."""
         self.dataframe = dataframe;
 
-    def impute_zeros(self, column):
+    def input_zeros(self, column):
+        """Method inputs zeros in spaces with missing values."""
         self.dataframe[column] = self.dataframe[column].fillna(0)
 
-    def impute_median(self, column):
+    def inpute_median(self, column):
+        """Method inputs median values in spaces with missing values."""
         self.dataframe[column] = self.dataframe[column].fillna(self.dataframe[column].median(), inplace=True)
     def drop(self, column):
         """Method removes specific columns."""
