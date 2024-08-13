@@ -10,9 +10,10 @@ class DataFrameTransform:
         """Method inputs zeros in spaces with missing values."""
         self.dataframe[column] = self.dataframe[column].fillna(0)
 
-    def inpute_median(self, column):
+    def input_median(self, column):
         """Method inputs median values in spaces with missing values."""
         self.dataframe[column] = self.dataframe[column].fillna(self.dataframe[column].median(), inplace=True)
+        
     def drop(self, column):
         """Method removes specific columns."""
         for i in column:

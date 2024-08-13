@@ -9,8 +9,13 @@ class DataTransform:
     def to_float (self, column):
         """Method turns values of a specified column from string to float data."""
         for i in column:
-            self.dataframe[i] = self.dataframe[i].str.extract('(\d+)').astype(float)
-                
+        # Ensure the column is of type string
+            if self.dataframe[i].dtype == 'object':
+                self.dataframe[i] = self.dataframe[i].str.extract('(\d+)').astype(float)
+            else:
+                # If it's already numeric, convert it directly
+                self.dataframe[i] = self.dataframe[i].astype(float)
+
     def to_date_time(self, column):
         """Method turns values of a specified column to datetime format."""
         self.dataframe[column] = pd.to_datetime(self.dataframe[column], format="%b-%Y")

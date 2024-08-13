@@ -105,34 +105,3 @@ if __name__ == "__main__":
     data = Generator.extract()
     Generator.save(data, file1)
     dataframe = load_dataframe(file1)
-
-    #familiarizing with data
-    Stats = DataFrameInfo(dataframe)
-    print(Stats.data_type())
-    print(Stats.describe(['loan_amount']))
-    print(Stats.distinct_values(['grade']))
-    print(Stats.shape())
-    print(Stats.null_values())
-
-
-
-    dropped_columns=['mths_since_last_delinq', 'mths_since_last_record', 'mths_since_last_major_derog', 
-                     'next_payment_date']
-    TransformedData.drop(dropped_columns)
-    modified_dataframe = TransformedData.dataframe
-    modified_dataframe.to_csv(file2)
-    Stats = DataFrameInfo(modified_dataframe)
-    print(Stats.null_values())
-
-#'funded_amount', 'int_rate', 'term' 'employment_length', 'last_payment_date' and 'collections_12_mths_ex_med' all have under 
-#10% of data missing and will therefore either be discarded or imputed as follows
-
-    TransformedDataFrame = DataFrameTransform(modified_dataframe)
-    TransformedDataFrame.impute_zeros('employment_length') 
-    #'employment_length' missing values are probably refering to people being unemployed therefore will be imputed as zeros
-    TransformedDataFrame.impute_median(['funded_amount', 'term', 'int_rate'])
-    modified_dataframe.dropna(subset=['last_payment_date'], inplace=True)
-    Stats = DataFrameInfo(modified_dataframe)
-    print(Stats.null_values())
-
-#fix to_float method then finalize inputting nan 
