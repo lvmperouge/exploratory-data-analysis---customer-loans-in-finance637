@@ -24,7 +24,7 @@ class DataTransform:
         """Method assigns the values of a specified column to categorical data."""
         self.dataframe[column] = self.dataframe[column].astype('category')
 
-    def drop(self, column):
+    def drop_column(self, column):
         """Method removes specific columns."""
         for i in column:
             self.dataframe.drop(i, axis=1, inplace=True)
